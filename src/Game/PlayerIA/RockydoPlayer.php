@@ -65,6 +65,7 @@ class RockydoPlayer extends Player
         $myMostFrequentMoveCount = $this->mostFrequentMove($myMoves)[1];
 
 
+        //If the opponent tries to predict my move, play the opposite
         $topChoice = $myMostFrequentMove;
         if ($topChoice == "paper")
             return parent::rockChoice();
@@ -90,7 +91,6 @@ class RockydoPlayer extends Player
             return parent::scissorsChoice();
         }*/
 
-        return parent::rockChoice();
 
   }
 };
