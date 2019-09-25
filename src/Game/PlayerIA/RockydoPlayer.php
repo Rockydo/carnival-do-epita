@@ -65,7 +65,14 @@ class RockydoPlayer extends Player
         $myMostFrequentMoveCount = $this->mostFrequentMove($myMoves)[1];
 
 
-        if ($opponentMostFrequentMoveCount > $myMostFrequentMoveCount)
+        $topChoice = $myMostFrequentMove;
+        if ($topChoice == "paper")
+            return parent::rockChoice();
+        else if ($topChoice == "rock")
+            return parent::paperChoice();
+        return parent::scissorsChoice();
+
+        /*f ($opponentMostFrequentMoveCount > $myMostFrequentMoveCount)
         {
             $topChoice = $opponentMostFrequentMove;
             if ($topChoice == "paper")
@@ -81,7 +88,7 @@ class RockydoPlayer extends Player
             else if ($topChoice == "rock")
                 return parent::paperChoice();
             return parent::scissorsChoice();
-        }
+        }*/
 
         return parent::rockChoice();
 
