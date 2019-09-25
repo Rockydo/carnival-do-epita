@@ -15,6 +15,14 @@ class RockydoPlayer extends Player
     protected $opponentSide;
     protected $result;
 
+    public function mostFrequentMove($moves)
+    {
+        $topMove = array_search(max($moves),$moves);
+        $moveCount = $moves[$topMove];
+        $ret =[$topMove, $moveCount];
+        return $ret;
+    }
+
     public function getChoice()
     {
         // -------------------------------------    -----------------------------------------------------
@@ -41,26 +49,34 @@ class RockydoPlayer extends Player
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
 
+        //var_dump
 
-        $opMoves = $this->result->getChoicesFor($this->opponentSide);
-        if (count($opMoves) == 0)
-            return parent::scissorsChoice();
+        $opMoves = array_slice($this->result->getStatsFor($this->opponentSide), 1, 3);
+        $myMoves = array_slice($this->result->getStatsFor($this->mySide), 1, 3);
 
-        $moveCount = [
-            "paper" => 0,
-            "scissors" => 0,
-            "rock" => 0,
-        ];
+        //if ($this->result->getLastChoiceFor($this->mySide) == 0)
+          //  return parent::scissorsChoice();
 
-        foreach ($opMoves as $move)
-            $moveCount[$move]++;
+        $opponentMostFrequentMove = $this->mostFrequentMove($opMoves)[0];
+        $myMostFrequentMove = $this->mostFrequentMove($myMoves)[0];
 
-        $topChoice= array_search(max($moveCount),$moveCount);
-        
+        $opponentMostFrequentMoveCount = $this->mostFrequentMove($opMoves)[1];
+        $myMostFrequentMoveCount = $this->mostFrequentMove($myMoves)[1];
+
+        if ($opponentMostFrequentMoveCount > $myMostFrequentMoveCount)
+            $topChoice = $opponentMostFrequentMove;
+        else
+            $topChoice = $myMostFrequentMove;
+
         if ($topChoice == "paper")
            return parent::scissorsChoice();
         else if ($topChoice == "rock")
            return parent::paperChoice();
+
+        /*echo "/////////////////////////////";
+        var_dump($this->result->getStatsFor($this->opponentSide));
+        var_dump($this->result->getStatsFor($this->mySide));
+        echo $topChoice;*/
         return parent::rockChoice();
 
   }
