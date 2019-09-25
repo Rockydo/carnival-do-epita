@@ -54,6 +54,11 @@ class RockydoPlayer extends Player
         $opMoves = array_slice($this->result->getStatsFor($this->opponentSide), 1, 3);
         $myMoves = array_slice($this->result->getStatsFor($this->mySide), 1, 3);
 
+        $opScore = $this->result->getStatsFor($this->opponentSide)["score"];
+        $myScore = $this->result->getStatsFor($this->mySide)["score"];
+
+
+
         //if ($this->result->getLastChoiceFor($this->mySide) == 0)
           //  return parent::scissorsChoice();
 
@@ -62,6 +67,10 @@ class RockydoPlayer extends Player
 
         $opponentMostFrequentMoveCount = $this->mostFrequentMove($opMoves)[1];
         $myMostFrequentMoveCount = $this->mostFrequentMove($myMoves)[1];
+
+        //If the opponent generally plays one
+        if ($opScore > $myScore)
+            return parent::scissorsChoice();
 
         if ($opponentMostFrequentMoveCount > $myMostFrequentMoveCount)
         {
