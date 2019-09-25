@@ -40,7 +40,12 @@ class RockydoPlayer extends Player
         // -------------------------------------    -----------------------------------------------------
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
-        
-        return parent::paperChoice();
+        $random = rand(0, 2);
+        $this->prettyDisplay();
+        if ($random == 0)
+            return parent::paperChoice();
+        else if ($random == 1)
+            return parent::rockChoice();
+        return parent::scissorsChoice();
   }
 };
