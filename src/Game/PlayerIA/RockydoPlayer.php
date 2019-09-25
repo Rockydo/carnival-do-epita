@@ -54,26 +54,9 @@ class RockydoPlayer extends Player
         $opMoves = array_slice($this->result->getStatsFor($this->opponentSide), 1, 3);
         $myMoves = array_slice($this->result->getStatsFor($this->mySide), 1, 3);
 
-        $opName = $this->result->getStatsFor($this->opponentSide)["name"];
 
         if ($this->result->getLastChoiceFor($this->mySide) == 0)
-            return parent::scissorsChoice();
-
-        if ($opName == "myxiur")
-            return parent::scissorsChoice();
-        if ($opName == "Coaly")
             return parent::paperChoice();
-        if ($opName == "Leoprivate")
-            return parent::rockChoice();
-        if ($opName == "Sarahbl")
-            return parent::scissorsChoice();
-        if ($opName == "gantzerjulien")
-            return parent::paperChoice();
-        if ($opName == "alexbuhl")
-            return parent::rockChoice();
-
-
-
 
         $opponentMostFrequentMove = $this->mostFrequentMove($opMoves)[0];
         $myMostFrequentMove = $this->mostFrequentMove($myMoves)[0];
@@ -81,13 +64,6 @@ class RockydoPlayer extends Player
         $opponentMostFrequentMoveCount = $this->mostFrequentMove($opMoves)[1];
         $myMostFrequentMoveCount = $this->mostFrequentMove($myMoves)[1];
 
-
-        /*echo "/////////////////////////////";
-        var_dump($this->result->getStatsFor($this->opponentSide));
-        var_dump($this->result->getStatsFor($this->mySide));
-        echo "/////////////////////////////";*/
-
-        //If the opponent generally plays something more often than I
 
         if ($opponentMostFrequentMoveCount > $myMostFrequentMoveCount)
         {
@@ -106,9 +82,6 @@ class RockydoPlayer extends Player
                 return parent::paperChoice();
             return parent::scissorsChoice();
         }
-
-
-
 
         return parent::rockChoice();
 
