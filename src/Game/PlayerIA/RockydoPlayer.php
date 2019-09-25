@@ -56,12 +56,24 @@ class RockydoPlayer extends Player
 
         $opName = $this->result->getStatsFor($this->opponentSide)["name"];
 
-        //if ($opName == "")
-            //return parent::scissorsChoice();
+        if ($this->result->getLastChoiceFor($this->mySide) == 0)
+            return parent::scissorsChoice();
+
+        if ($opName == "myxiur")
+            return parent::scissorsChoice();
+        if ($opName == "Coaly")
+            return parent::paperChoice();
+        if ($opName == "Leoprivate")
+            return parent::rockChoice();
+        if ($opName == "Sarahbl")
+            return parent::scissorsChoice();
+        if ($opName == "gantzerjulien")
+            return parent::paperChoice();
+        if ($opName == "alexbuhl")
+            return parent::rockChoice();
 
 
-        //if ($this->result->getLastChoiceFor($this->mySide) == 0)
-          //  return parent::scissorsChoice();
+
 
         $opponentMostFrequentMove = $this->mostFrequentMove($opMoves)[0];
         $myMostFrequentMove = $this->mostFrequentMove($myMoves)[0];
