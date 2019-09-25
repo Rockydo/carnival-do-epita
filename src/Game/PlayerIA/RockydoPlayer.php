@@ -69,11 +69,18 @@ class RockydoPlayer extends Player
         $myMostFrequentMoveCount = $this->mostFrequentMove($myMoves)[1];
 
 
-        if ($myScore > 300 && $opScore > $myScore)
-            return parent::scissorsChoice();
+
 
         //If the opponent generally plays something more often than I
-        if ($opponentMostFrequentMoveCount > $myMostFrequentMoveCount)
+        if ($myScore > 300 && $opScore > $myScore) {
+            $topChoice = $myMostFrequentMove;
+            if ($topChoice == "paper")
+                return parent::rockChoice();
+            else if ($topChoice == "rock")
+                return parent::paperChoice();
+            return parent::scissorsChoice();
+        }
+        else if ($opponentMostFrequentMoveCount > $myMostFrequentMoveCount)
         {
             $topChoice = $opponentMostFrequentMove;
             if ($topChoice == "paper")
