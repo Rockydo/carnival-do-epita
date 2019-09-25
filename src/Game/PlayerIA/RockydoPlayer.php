@@ -49,8 +49,8 @@ class RockydoPlayer extends Player
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
 
-        //var_dump
 
+        //Get moves
         $opMoves = array_slice($this->result->getStatsFor($this->opponentSide), 1, 3);
         $myMoves = array_slice($this->result->getStatsFor($this->mySide), 1, 3);
 
@@ -64,19 +64,30 @@ class RockydoPlayer extends Player
         $myMostFrequentMoveCount = $this->mostFrequentMove($myMoves)[1];
 
         if ($opponentMostFrequentMoveCount > $myMostFrequentMoveCount)
+        {
             $topChoice = $opponentMostFrequentMove;
-        else
+            if ($topChoice == "paper")
+                return parent::scissorsChoice();
+            else if ($topChoice == "rock")
+                return parent::paperChoice();
+            return parent::rockChoice();
+        }
+        else {
             $topChoice = $myMostFrequentMove;
+            if ($topChoice == "paper")
+                return parent::rockChoice();
+            else if ($topChoice == "rock")
+                return parent::paperChoice();
+            return parent::scissorsChoice();
+        }
 
-        if ($topChoice == "paper")
-           return parent::scissorsChoice();
-        else if ($topChoice == "rock")
-           return parent::paperChoice();
+
 
         /*echo "/////////////////////////////";
         var_dump($this->result->getStatsFor($this->opponentSide));
         var_dump($this->result->getStatsFor($this->mySide));
-        echo $topChoice;*/
+        echo $topChoice;
+        echo "/////////////////////////////";*/
         return parent::rockChoice();
 
   }
