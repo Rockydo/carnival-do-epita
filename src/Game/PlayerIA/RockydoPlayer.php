@@ -40,13 +40,28 @@ class RockydoPlayer extends Player
         // -------------------------------------    -----------------------------------------------------
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
+
+
         $opMoves = $this->result->getChoicesFor($this->opponentSide);
         if (count($opMoves) == 0)
             return parent::scissorsChoice();
-        /*else
-        {
-           foreach (move )
-        }*/
-        return parent::scissorsChoice();
+
+        $moveCount = [
+            "paper" => 0,
+            "scissors" => 0,
+            "rock" => 0,
+        ];
+
+        foreach ($opMoves as $move)
+            $moveCount[$move]++;
+
+        $topChoice= array_search(max($moveCount),$moveCount);
+        
+        if ($topChoice == "paper")
+           return parent::scissorsChoice();
+        else if ($topChoice == "rock")
+           return parent::paperChoice();
+        return parent::rockChoice();
+
   }
 };
